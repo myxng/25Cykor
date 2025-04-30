@@ -129,8 +129,8 @@ void func2(int arg1, int arg2)
     push("arg1", arg1);
     push("Return Address", -1);
     push("func2 SFP", FP);
-    //FP=SP;
-    //push("var_2", 200);
+    FP=SP;
+    push("var_2", 200);
 
     print_stack();
     func3(77);
