@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /*  call_stack
     
@@ -73,6 +74,29 @@ void print_stack()
     printf("================================\n\n");
 }
 
+void push(char* info, int val)
+{
+    if (SP+1 >= STACK_SIZE)
+    {
+        printf("Push Error: Stack is Full.\n");
+        return ;
+    }
+
+    SP++;
+    strcpy(stack_info[SP], info);
+    call_stack[SP]=val;
+}
+
+void pop()
+{
+    if (SP==-1)
+    {
+        printf("Pop Error: Stack is Empty.\n");
+        return ;
+    }
+
+    SP--;
+}
 
 //func 내부는 자유롭게 추가해도 괜찮으나, 아래의 구조를 바꾸지는 마세요
 void func1(int arg1, int arg2, int arg3)
@@ -80,10 +104,19 @@ void func1(int arg1, int arg2, int arg3)
     int var_1 = 100;
 
     // func1의 스택 프레임 형성 (함수 프롤로그 + push)
+    push("arg3", arg3);
+    push("arg2", arg2);
+    push("arg1", arg1);
+    push("Return Address", -1);
+    push("func1 SFP", -1);
+    FP=SP;
+    push("var_1", 100);
+
     print_stack();
+
     func2(11, 13);
     // func2의 스택 프레임 제거 (함수 에필로그 + pop)
-    print_stack();
+    // print_stack();
 }
 
 
@@ -92,10 +125,11 @@ void func2(int arg1, int arg2)
     int var_2 = 200;
 
     // func2의 스택 프레임 형성 (함수 프롤로그 + push)
-    print_stack();
+
+    // print_stack();
     func3(77);
     // func3의 스택 프레임 제거 (함수 에필로그 + pop)
-    print_stack();
+    // print_stack();
 }
 
 
@@ -105,7 +139,7 @@ void func3(int arg1)
     int var_4 = 400;
 
     // func3의 스택 프레임 형성 (함수 프롤로그 + push)
-    print_stack();
+    // print_stack();
 }
 
 
@@ -114,6 +148,6 @@ int main()
 {
     func1(1, 2, 3);
     // func1의 스택 프레임 제거 (함수 에필로그 + pop)
-    print_stack();
+    // print_stack();
     return 0;
 }
