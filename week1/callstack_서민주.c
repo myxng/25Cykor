@@ -145,7 +145,13 @@ void func3(int arg1)
     int var_4 = 400;
 
     // func3의 스택 프레임 형성 (함수 프롤로그 + push)
-    // print_stack();
+    push("arg1", arg1);
+    push("Return Address", -1);
+    push("func3 SFP", FP);
+    FP=SP;
+    push("var_3", 300);
+    push("var_4", 400);
+    print_stack();
 }
 
 
