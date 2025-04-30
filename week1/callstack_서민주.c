@@ -95,7 +95,7 @@ void pop()
         return ;
     }
 
-    SP--;
+    SP=FP;
 }
 
 //func 내부는 자유롭게 추가해도 괜찮으나, 아래의 구조를 바꾸지는 마세요
@@ -134,8 +134,12 @@ void func2(int arg1, int arg2)
 
     print_stack();
     func3(77);
+    
     // func3의 스택 프레임 제거 (함수 에필로그 + pop)
-    // print_stack();
+    pop();
+    FP = call_stack[FP];
+    SP--;
+    print_stack();
 }
 
 
