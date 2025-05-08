@@ -6,11 +6,18 @@
 #include <fcntl.h>
 
 #define BUFSIZE 1024
+#define MAX_ARGS 128
+
+void run_pipe();
+void run_logic();
+void run_cd();
+void run_pwd();
 
 void print_prompt()
 {
     char cwd[BUFSIZE];
-    if (getcwd(cwd, sizeof(cwd)) == NULL) {
+    if (getcwd(cwd, sizeof(cwd)) == NULL) 
+    {
         perror("getcwd");
         exit(1);
     }
@@ -23,6 +30,31 @@ void print_prompt()
     fflush(stdout);
 }
 
+void analysis_prompt(char *line)
+{
+    char* cwd[MAX_ARGS];
+    
+    if (strchr(line, '|')) {
+        run_pipe(line);
+        return;
+    }
+
+    if (run_logic(line)) return;
+
+    char *args[MAX_ARGS];
+    int i = 0;
+    args[i] = strtok(line, " \n");
+    while (args[i] != NULL) args[++i] = strtok(NULL, " \n");
+    if (args[0] == NULL) return;
+
+    int bg = is_background(args, i);
+    if (strcmp(args[0], "cd") == 0) run_cd(args);
+    else if (strcmp(args[0], "pwd") == 0) run_pwd();
+    else if (strcmp(args[0], "exit") == 0) exit(0);
+    else printf("Unsupported command: %s\n", args[0]);
+
+}
+
 int main() 
 {
     char line[BUFSIZE];
@@ -32,11 +64,10 @@ int main()
         print_prompt();
         if (fgets(line, BUFSIZE, stdin) == NULL) break;
 
-        printf("Command: %s\n", line);
         char* cmd = strtok(line, ";");
         while (cmd != NULL)
         {
-            printf("After tokenized: %s\n", cmd);
+            analysis_prompt(cmd);
             cmd = strtok(NULL, ";");
         }
     }
