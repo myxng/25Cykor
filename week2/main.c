@@ -5,13 +5,33 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 
-int main() {
-    char line[1024];
+#define BUFSIZE 1024
 
+void print_prompt()
+{
+    char cwd[BUFSIZE];
+    if (getcwd(cwd, sizeof(cwd)) == NULL) {
+        perror("getcwd");
+        exit(1);
+    }
+
+    char *dir_name = strrchr(cwd, '/');
+    if (dir_name != NULL) dir_name++;
+    else dir_name = cwd;
+
+    printf("[%s]$ ", dir_name);
+    fflush(stdout);
+}
+
+int main() 
+{
+    char line[BUFSIZE];
+    
     while (1) {
-        printf("my_shell$ ");
+        print_prompt();
         if (fgets(line, sizeof(line), stdin) == NULL) break;
-        printf("Command: %s", line);
+
+        printf("Command: %s\n", line);
     }
 
     return 0;
