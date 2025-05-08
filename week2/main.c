@@ -27,11 +27,18 @@ int main()
 {
     char line[BUFSIZE];
     
-    while (1) {
+    while (1)
+    {
         print_prompt();
-        if (fgets(line, sizeof(line), stdin) == NULL) break;
+        if (fgets(line, BUFSIZE, stdin) == NULL) break;
 
         printf("Command: %s\n", line);
+        char* cmd = strtok(line, ";");
+        while (cmd != NULL)
+        {
+            printf("After tokenized: %s\n", cmd);
+            cmd = strtok(NULL, ";");
+        }
     }
 
     return 0;
