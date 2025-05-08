@@ -8,6 +8,34 @@
 #define BUFSIZE 1024
 #define MAX_ARGS 128
 
+void print_prompt();
+void run_pipe();
+void run_logic();
+void run_cd(char* args);
+void run_pwd();
+void is_background();
+void analysis_prompt(char *line);
+
+int main() 
+{
+    char line[BUFSIZE];
+    
+    while (1)
+    {
+        print_prompt();
+        if (fgets(line, BUFSIZE, stdin) == NULL) break;
+
+        char* cmd = strtok(line, ";");
+        while (cmd != NULL)
+        {
+            analysis_prompt(cmd);
+            cmd = strtok(NULL, ";");
+        }
+    }
+
+    return 0;
+}
+
 void print_prompt()
 {
     char cwd[BUFSIZE];
@@ -54,8 +82,6 @@ void analysis_prompt(char *line)
     else printf("Unsupported command: %s\n", args[0]);
 }
 
-void run_pipe();
-void run_logic();
 void run_cd(char* args)
 {
     if (args[1]==NULL) 
@@ -69,25 +95,16 @@ void run_cd(char* args)
     }
     return;
 }
-void run_pwd();
-void is_background();
 
-int main() 
+void run_pwd()
 {
-    char line[BUFSIZE];
-    
-    while (1)
-    {
-        print_prompt();
-        if (fgets(line, BUFSIZE, stdin) == NULL) break;
-
-        char* cmd = strtok(line, ";");
-        while (cmd != NULL)
-        {
-            analysis_prompt(cmd);
-            cmd = strtok(NULL, ";");
-        }
-    }
-
-    return 0;
+    char* cwd[BUFSIZE];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+        printf("%s\n", cwd);
+    else
+        perror("pwd");
 }
+
+
+
+
