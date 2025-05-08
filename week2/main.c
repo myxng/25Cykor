@@ -8,11 +8,6 @@
 #define BUFSIZE 1024
 #define MAX_ARGS 128
 
-void run_pipe();
-void run_logic();
-void run_cd();
-void run_pwd();
-
 void print_prompt()
 {
     char cwd[BUFSIZE];
@@ -34,12 +29,17 @@ void analysis_prompt(char *line)
 {
     char* cwd[MAX_ARGS];
     
-    if (strchr(line, '|')) {
+    if (strchr(line, '|')) 
+    {
         run_pipe(line);
         return;
     }
 
-    if (run_logic(line)) return;
+    if (strcmp(line, '&&' || '||'))
+    {
+        run_logic(line);
+        return;
+    }
 
     char *args[MAX_ARGS];
     int i = 0;
@@ -52,8 +52,25 @@ void analysis_prompt(char *line)
     else if (strcmp(args[0], "pwd") == 0) run_pwd();
     else if (strcmp(args[0], "exit") == 0) exit(0);
     else printf("Unsupported command: %s\n", args[0]);
-
 }
+
+void run_pipe();
+void run_logic();
+void run_cd(char* args)
+{
+    if (args[1]==NULL) 
+        fprintf("Error: cd argument doesn't exist.");
+    else if (strcmp(args[1],"~")==0)
+        chdir(getenv("HOME"));
+    else
+    {
+        if (chdir(args[1])!=0)
+            printf("Error: cd failed to change directory to %s.\n", args[1]);
+    }
+    return;
+}
+void run_pwd();
+void is_background();
 
 int main() 
 {
