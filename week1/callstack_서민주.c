@@ -89,16 +89,21 @@ void push(char* info, int val)
 
 void pop()
 {
-    if (SP==-1)
+    if (SP == -1)
     {
         printf("Pop Error: Stack is Empty.\n");
-        return ;
+        return;
     }
 
-    SP=FP;
+    while (SP > FP)
+    {
+        call_stack[SP] = 0;         
+        stack_info[SP][0] = '\0';   
+        SP--;
+    }
 }
 
-//func 내부는 자유롭게 추가해도 괜찮으나, 아래의 구조를 바꾸지는 마세요
+//func 내부는 자유롭게 추가해도 괜찮으나, 아래 구조를 바꾸지는 마세요
 void func1(int arg1, int arg2, int arg3)
 {
     int var_1 = 100;
@@ -134,7 +139,7 @@ void func2(int arg1, int arg2)
     push("arg2", arg2);
     push("arg1", arg1);
     push("Return Address", -1);
-    push("func2 SFP", FP);
+    push("func2 SFP", SP);
     FP=SP;
     push("var_2", 200);
 
