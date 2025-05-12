@@ -24,14 +24,29 @@ int main()
     {
         print_prompt();
         if (fgets(line, BUFSIZE, stdin) == NULL) break;
-
+    
         char* cmd = strtok(line, ";");
         while (cmd != NULL)
         {
-            analysis_prompt(cmd);
+            // 앞뒤 공백 제거
+            while (*cmd == ' ' || *cmd == '\t') cmd++;
+            char *end = cmd + strlen(cmd) - 1;
+            while (end > cmd && (*end == ' ' || *end == '\t' || *end == '\n')) {
+                *end = '\0';
+                end--;
+            }
+    
+            // 셸 내부 명령어는 부모 프로세스에서 직접 처리
+            if (strncmp(cmd, "cd", 2) == 0 || strncmp(cmd, "pwd", 3) == 0 || strncmp(cmd, "exit", 4) == 0) {
+                analysis_prompt(cmd);
+            } else {
+                // 자식 프로세스를 사용하지 않고 부모에서 처리
+                analysis_prompt(cmd);
+            }
+    
             cmd = strtok(NULL, ";");
         }
-    }
+    }   
 
     return 0;
 }
@@ -89,33 +104,17 @@ void run_cd(char** args)
         return;
     }
     
-    if (strcmp(args[1],".")==0)
-        return;
-    
-    else if (strcmp(args[1],"..")==0)
-    {
-        if (chdir("..")!=0) perror("cd");
-        return;
-    }
-
-    else if (strcmp(args[1],"/")==0)
-    {
-        if (chdir("/")!=0) perror("cd");
-        return;
-    }
-    
-    else if (strcmp(args[1],"~")==0)
+    if (strcmp(args[1],"~")==0)
     {
         if (chdir(getenv("HOME"))!=0) perror("cd");
         return;
     }
-           
-    else
-    {
-        if (chdir(args[1])!=0)
-            printf("Error: cd failed to change directory to %s.\n", args[1]);
-    }
-    return;
+
+    if (chdir(args[1])!=0)
+        printf("Error: cd failed to change directory to %s.\n", args[1]);
+
+    if (strcmp(args[1],".")==0)
+        return;
 }
 
 void run_pwd()
