@@ -101,6 +101,8 @@ void pop()
         stack_info[SP][0] = '\0';   
         SP--;
     }
+
+    return;
 }
 
 //func 내부는 자유롭게 추가해도 괜찮으나, 아래 구조를 바꾸지는 마세요
@@ -139,7 +141,7 @@ void func2(int arg1, int arg2)
     push("arg2", arg2);
     push("arg1", arg1);
     push("Return Address", -1);
-    push("func2 SFP", SP);
+    push("func2 SFP", FP);
     FP=SP;
     push("var_2", 200);
 
