@@ -113,8 +113,7 @@ void run_cd(char** args)
     if (chdir(args[1])!=0)
         printf("Error: cd failed to change directory to %s.\n", args[1]);
 
-    if (strcmp(args[1],".")==0)
-        return;
+    return;
 }
 
 void run_pwd()
