@@ -16,38 +16,20 @@ void run_pwd();
 void is_background(char* args, int i);
 void analysis_prompt(char *line);
 
-int main() 
-{
+int main() {
     char line[BUFSIZE];
-    
-    while (1)
+    while (1) 
     {
         print_prompt();
         if (fgets(line, BUFSIZE, stdin) == NULL) break;
-    
-        char* cmd = strtok(line, ";");
-        while (cmd != NULL)
+
+        char *cmd = strtok(line, ";");
+        while (cmd != NULL) 
         {
-            // 앞뒤 공백 제거
-            while (*cmd == ' ' || *cmd == '\t') cmd++;
-            char *end = cmd + strlen(cmd) - 1;
-            while (end > cmd && (*end == ' ' || *end == '\t' || *end == '\n')) {
-                *end = '\0';
-                end--;
-            }
-    
-            // 셸 내부 명령어는 부모 프로세스에서 직접 처리
-            if (strncmp(cmd, "cd", 2) == 0 || strncmp(cmd, "pwd", 3) == 0 || strncmp(cmd, "exit", 4) == 0) {
-                analysis_prompt(cmd);
-            } else {
-                // 자식 프로세스를 사용하지 않고 부모에서 처리
-                analysis_prompt(cmd);
-            }
-    
+            analysis_prompt(cmd);
             cmd = strtok(NULL, ";");
         }
-    }   
-
+    }
     return 0;
 }
 
@@ -94,6 +76,8 @@ void analysis_prompt(char *line)
     else if (strcmp(args[0], "pwd") == 0) run_pwd();
     else if (strcmp(args[0], "exit") == 0) exit(0);
     else printf("Unsupported command: %s\n", args[0]);
+
+    return;
 }
 
 void run_cd(char** args)
