@@ -7,6 +7,20 @@ include "db.php";
     <head>
         <meta charset="UTF-8">
         <title>Read</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                border: 1px solid #999;
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
     <body>
         <h2>Lists</h2>
         <p><a href="index.php"><button>Go to Main</button></a></p>
