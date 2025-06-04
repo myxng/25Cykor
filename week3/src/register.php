@@ -12,7 +12,7 @@ include 'db.php';
         <form method="post">
             <p><input type="text" name="id" placeholder="ID"></p>
             <p><input type="password" name="pw" placeholder="PW"></p>
-            <p><button type="submit">Register</button></p>
+            <p><button type="submit">Sign Up</button></p>
         </form>
 
         <p><a href="index.php"><button type="submit">Go to Main</button></a></p>

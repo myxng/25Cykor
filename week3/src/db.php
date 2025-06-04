@@ -7,4 +7,3 @@ if ($mysqli->connect_error)
 
 session_start();
 ?>
-
