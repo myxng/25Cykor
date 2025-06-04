@@ -1,5 +1,33 @@
 <?php
 include 'db.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") 
+{
+    $id = $_POST['id'];
+    $pw = $_POST['pw'];
+
+    $result = $mysqli->query("SELECT * FROM users WHERE id='$id'");
+
+    if ($result->num_rows > 0)
+    {
+        $row = $result->fetch_assoc();
+
+        if ($row['pw']===$pw)
+        {
+            $_SESSION['id'] = $row['id'];
+            header("Location: index.php");
+            exit;
+        }
+        else
+        {
+            echo "Wrong Password";
+        }
+    }
+    else
+    {
+        echo "Not Existing ID. Register First!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,36 +44,6 @@ include 'db.php';
         </form>
 
         <p><a href="index.php"><button type="submit">Go to Main</button></a></p>
-
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] === "POST") 
-        {
-            $id = $_POST['id'];
-            $pw = $_POST['pw'];
-
-            $result = $mysqli->query("SELECT * FROM users WHERE id='$id");
-
-            if ($result->num_rows > 0)
-            {
-                $row = $result->fetch_assoc();
-
-                if ($row['pw']===$pw)
-                {
-                    $_SESSION['id'] = $row['id'];
-                    header("Location: index.php");
-                    exit;
-                }
-                else
-                {
-                    echo "Wrong Password";
-                }
-            }
-            else
-            {
-                echo "Not Existing ID. Register First!";
-            }
-        }
-        ?>
 
     </body>
 </html>
