@@ -33,7 +33,7 @@ include 'db.php';
             {
                 // 새 사용자 추가
                 $mysqli->query("INSERT INTO users (id, pw) VALUES ('$id', '$pw')");
-                echo "<p style='color:green;'> 회원가입 성공! <a href='login.php'>로그인하러 가기</a></p>";
+                echo "<p style='color:green;'> 회원가입 성공!</p> <a href='login.php'>로그인하러 가기</a>";
                 exit;
             }
         }
