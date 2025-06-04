@@ -40,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         <form method="post">
             <p><input type="text" name="id" placeholder="ID"></p>
             <p><input type="password" name="pw" placeholder="PW"></p>
-            <p><button type="submit">Login</button></p>
+            <button type="submit">Login</button>
+            <a href="register.php"><button type="button">Register</button></a>
         </form>
 
         <p><a href="index.php"><button type="submit">Go to Main</button></a></p>
