@@ -11,7 +11,7 @@ include 'db.php';
         <h2>Register</h2>
         <form method="post">
             <p><input type="text" name="id" placeholder="ID"></p>
-            <p><input type="text" name="password" placeholder="PW"></p>
+            <p><input type="password" name="pw" placeholder="PW"></p>
             <p><button type="submit">Register</button></p>
         </form>
 
