@@ -21,7 +21,7 @@ include 'db.php';
         if ($_SERVER["REQUEST_METHOD"] === "POST") 
         {
             $id = $_POST['id'];
-            $pw = password_hash($_POST['pw'], PASSWORD_DEFAULT);
+            $pw = $_POST['pw'];
 
             // 이미 존재하는 아이디인지 확인
             $check = $mysqli->query("SELECT * FROM users WHERE id='$id'");
