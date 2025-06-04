@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title></title>
     <body>
-        <h1>Hello, World!</h1>
-        <form action="login.php" method="post">
+        <h2>Login</h2>
+        <form method="post">
             <p><input type="text" name="id" placeholder="ID"></p>
-            <p><input type="text" name="password" placeholder="PW"></p>
+            <p><input type="password" name="pw" placeholder="PW"></p>
             <p><button type="submit">Login</button></p>
         </form>
 
-        <a href="create.php">Create</a>
-        <form action="create_process.php" method="post">
-        <a href="read.php">Read</a><br>
-        <form action="read_process.php" method="post">
-        <a href="update.php">Update</a><br>
-        <form action="update_process.php" method="post">
-        <a href="delete.php">Delete</a><br>
-        <form action="delete_process.php" method="post">
+        <p><a href="index.php"><button type="submit">Go to Main</button></a></p>
+
     </body>
 </html>

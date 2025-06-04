@@ -15,7 +15,7 @@ include 'db.php';
             <p><button type="submit">Register</button></p>
         </form>
 
-        <p><a href="index.php">← 메인으로</a></p>
+        <p><a href="index.php"><button type="submit">Go to Main</button></a></p>
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] === "POST") 
