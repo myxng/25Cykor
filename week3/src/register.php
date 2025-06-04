@@ -1,3 +1,7 @@
+<?php
+include 'db.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,5 +16,27 @@
         </form>
 
         <p><a href="index.php">← 메인으로</a></p>
+
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] === "POST") 
+        {
+            $id = $_POST['id'];
+            $pw = password_hash($_POST['pw'], PASSWORD_DEFAULT);
+
+            // 이미 존재하는 아이디인지 확인
+            $check = $mysqli->query("SELECT * FROM users WHERE id='$id'");
+
+            if ($check->num_rows > 0) 
+            {
+                echo "<p style='color:red;'> 이미 존재하는 아이디입니다.</p>";
+            } else 
+            {
+                // 새 사용자 추가
+                $mysqli->query("INSERT INTO users (id, pw) VALUES ('$id', '$pw')");
+                echo "<p style='color:green;'> 회원가입 성공! <a href='login.php'>로그인하러 가기</a></p>";
+                exit;
+            }
+        }
+        ?>
     </body>
 </html>
