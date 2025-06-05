@@ -10,7 +10,8 @@ include "db.php";
         <style>
             table {
                 border-collapse: collapse;
-                width: 100%;
+                width: 80%;
+                margin-top: 15px;
             }
             th, td {
                 border: 1px solid #999;
@@ -23,8 +24,8 @@ include "db.php";
         </style>
     <body>
         <h2>Lists</h2>
-        <p><a href="index.php"><button>Go to Main</button></a></p>
-        
+        <a href="index.php"><button>Go to Main</button></a>
+
         <table>
             <tr>
                 <th>No.</th>
@@ -40,7 +41,7 @@ include "db.php";
         {
             echo "<tr>";
             echo "<td>{$row['id']}</td>";
-            echo "<td>{$row['title']}</td>";
+            echo "<td><a href='view.php?id={$row['id']}'>{$row['title']}</a></td>";
             echo "<td>{$row['author']}</td>";
             echo "<td>{$row['created_at']}</td>";
             echo "</tr>";
