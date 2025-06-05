@@ -36,15 +36,17 @@ include "db.php";
 
         <?php
         $result = $mysqli->query("SELECT * FROM posts ORDER BY id DESC");
+        $num = 1;
 
         while ($row=mysqli_fetch_assoc($result))
         {
             echo "<tr>";
-            echo "<td>{$row['id']}</td>";
+            echo "<td>$num</td>";
             echo "<td><a href='view.php?id={$row['id']}'>{$row['title']}</a></td>";
             echo "<td>{$row['author']}</td>";
             echo "<td>{$row['created_at']}</td>";
             echo "</tr>";
+            $num++;
         }
         ?>
 
