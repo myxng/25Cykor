@@ -21,7 +21,15 @@ $row = $result->fetch_assoc();
         <p><?php echo nl2br($row['content']); ?></p>
 
         <a href="read.php"><button type="submit">Go to List</button></a>
-        <a href="update.php"><button type="submit">Edit</button></a>
-        <a href="delete.php"><button type="submit">Delete</button></a>
+
+        <?php
+        if ($_SESSION['id']===$row['author'])
+        {
+            echo '<a href="update.php?id=' . $row['id'] . '"><button type="submit">Edit</button></a>';
+            echo '&nbsp;';
+            echo '<a href="delete.php?id=' . $row['id'] . '"><button type="submit">Delete</button></a>';
+        }
+        ?>
+        
     </body>
 </html>
