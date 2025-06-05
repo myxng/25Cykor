@@ -17,6 +17,6 @@ session_destroy();
 ?>
 
 <script>
-    alert("로그아웃 되었습니다.");
+    alert("Logout. See U Later!");
     location.replace('index.php');
 </script>

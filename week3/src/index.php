@@ -19,7 +19,7 @@ session_start();
             <h1>Hello, <?php echo htmlspecialchars($_SESSION['id']); ?>!</h1>
 
             <ul>
-                <li><a href="create.php"> New </a></li>
+                <li><a href="create.php"> 글 작성하기 </a></li>
                 <li><a href="read.php"> 게시판 보기 </a></li>
             </ul>            
 
