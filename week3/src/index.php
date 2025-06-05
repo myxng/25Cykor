@@ -19,10 +19,8 @@ session_start();
             <h1>Hello, <?php echo htmlspecialchars($_SESSION['id']); ?>!</h1>
 
             <ul>
-                <li><a href="create.php"> Create </a></li>
-                <li><a href="read.php"> Read </a></li>
-                <li><a href="update.php"> Edit </a></li>
-                <li><a href="delete.php"> Delete </a></li>
+                <li><a href="create.php"> New </a></li>
+                <li><a href="read.php"> 게시판 보기 </a></li>
             </ul>            
 
             <form action="logout.php" method="post">

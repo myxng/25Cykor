@@ -11,12 +11,12 @@ if (!isset($_SESSION['id']))
 if ($_SERVER['REQUEST_METHOD']==="POST")
 {
     $title = $_POST['title'];
-    $content = $_POST['content'];
+    $content = $_POST['description'];
     $author = $_SESSION['id'];
 
     $mysqli->query("INSERT INTO posts (title, content, author) VALUES ('$title', '$content', '$author')");
     echo "등록이 성공적으로 되었습니다.";
-    echo "<a href=read.php></a>";
+    echo "<p><a href=read.php>Go to Posting Lists</a></p>";
 }
 ?>
 
@@ -34,5 +34,8 @@ if ($_SERVER['REQUEST_METHOD']==="POST")
                 placeholder="Description"></textarea>
             </p>
             <p><button type="submit">submit</button></p>
+        </form>
+        
+        <p><a href="index.php"><button type="submit">Go to Main</button></a></p>
     </body>
 </html>
