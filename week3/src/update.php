@@ -11,7 +11,7 @@ if ($row['author']!==$_SESSION['id'])
     exit;
 }
 
-if ($_SERVER['REQUEST METHOD']==='POST')
+if ($_SERVER['REQUEST_METHOD']==='POST')
 {
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -29,3 +29,20 @@ if ($_SERVER['REQUEST METHOD']==='POST')
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+</head>
+<body>
+    <h2>Edit Post</h2>
+    <form method="post">
+        <p><input type="text" name="title" value="<?php echo htmlspecialchars($row['title']); ?>"></p>
+        <p><textarea name="content"><?php echo htmlspecialchars($row['content']); ?></textarea></p>
+        <button type="submit">Update</button>
+    </form>
+    <p><a href="view.php?id=<?php echo $post_id; ?>"><button type="button">Cancel</button></a></p>
+</body>
+</html>
