@@ -20,6 +20,8 @@ $row = $result->fetch_assoc();
         <p><strong>Content</strong></p>
         <p><?php echo nl2br($row['content']); ?></p>
 
-        <p><a href="read.php"><button type="submit">Go to List</button></a></p>
+        <a href="read.php"><button type="submit">Go to List</button></a>
+        <a href="update.php"><button type="submit">Edit</button></a>
+        <a href="delete.php"><button type="submit">Delete</button></a>
     </body>
 </html>
