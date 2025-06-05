@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST')
 
     if ($delete)
     {
-        header("Location: read.phps");
+        header("Location: read.php");
         exit;
     }
     else
