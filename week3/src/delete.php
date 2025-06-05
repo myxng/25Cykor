@@ -29,3 +29,18 @@ if ($_SERVER['REQUEST_METHOD']==='POST')
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Post</title>
+</head>
+<body>
+    <h2>정말 삭제하시겠습니까?</h2>
+    <form method="post">
+        <button type="submit">삭제</button>
+        <a href="view.php?id=<?php echo $post_id; ?>"><button type="button">취소</button></a>
+    </form>
+</body>
+</html>
