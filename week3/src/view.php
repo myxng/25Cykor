@@ -5,6 +5,12 @@ $id = $_GET['id'];
 $result = $mysqli->query("SELECT * FROM posts WHERE id = $id");
 
 $row = $result->fetch_assoc();
+
+if (!$row)
+{
+    echo "No posts.";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
